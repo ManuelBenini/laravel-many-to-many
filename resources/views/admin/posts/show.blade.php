@@ -8,6 +8,15 @@
 
         <h1>Titolo: {{$post->title}}</h1>
         <h1 class="my-4">Categoria: {{$post->category ? $post->category->name : 'Questo post non ha nessuna categoria'}}</h1>
+        <h1 class="my-4">
+            Tag:
+            @forelse ($post->tags as $tag)
+                <span class="badge badge-pill badge-success">{{$tag->name}}</span>
+            @empty
+                <span>Nessun tag</span>
+            @endforelse
+        </h1>
+
         <p>Contenuto: {{$post->content}}</p>
 
         {{-- Bottoni --}}

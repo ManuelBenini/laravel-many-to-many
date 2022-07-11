@@ -18,7 +18,10 @@ class PostsTagsTableSeeder extends Seeder
 
             $tag = Tag::inRandomOrder()->first()->id;
 
-            $post->tags()->attach($tag);
+            if(!$post->tags->contains($tag)){
+                $post->tags()->attach($tag);
+            }
+
         }
     }
 }

@@ -19,6 +19,7 @@
             <th scope="col">ID</th>
             <th scope="col">Titolo</th>
             <th scope="col">Categoria</th>
+            <th scope="col">Tag</th>
             <th scope="col">Azioni</th>
             </tr>
         </thead>
@@ -31,6 +32,14 @@
                     <td>{{$post->title}}</td>
 
                     <td>{{$post->category ? $post->category->name : 'Nessuna categoria'}}</td>
+
+                    <td>
+                        @forelse ($post->tags as $tag)
+                            <span class="badge badge-pill badge-success">{{$tag->name}}</span>
+                        @empty
+                            <span>Nessuna categoria</span>
+                        @endforelse
+                    </td>
 
                     <td>
                         <a class="btn btn-success" href="{{route('admin.posts.show', $post)}}">Mostra</a>

@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Post;
+use App\Tag;
 use App\Category;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PostRequest;
 use Illuminate\Http\Request;
-use App\Post;
 
 class PostController extends Controller
 {
@@ -19,7 +20,8 @@ class PostController extends Controller
     {
         $posts = Post::orderBy('id', 'DESC')->paginate(10);
         $categories = Category::all();
-        return view('admin.posts.index', compact('posts', 'categories'));
+        $tags = Tag::all();
+        return view('admin.posts.index', compact('posts', 'categories', 'tags'));
     }
 
     /**
@@ -30,7 +32,8 @@ class PostController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('admin.posts.create', compact('categories'));
+        $tags = Tag::all();
+        return view('admin.posts.create', compact('categories', 'tags'));
     }
 
     /**
@@ -60,7 +63,8 @@ class PostController extends Controller
     public function show(Post $post)
     {
         $categories = Category::all();
-        return view('admin.posts.show', compact('post', 'categories'));
+        $tags = Tag::all();
+        return view('admin.posts.show', compact('post', 'categories', 'tags'));
     }
 
     /**
@@ -72,7 +76,8 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         $categories = Category::all();
-        return view('admin.posts.edit', compact('post', 'categories'));
+        $tags = Tag::all();
+        return view('admin.posts.edit', compact('post', 'categories', 'tags'));
     }
 
     /**

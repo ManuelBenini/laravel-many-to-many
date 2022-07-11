@@ -67,6 +67,7 @@ $().ready(function(){
                 errors = true;
             }
 
+
             if(errors){
                 event.preventDefault();
             }

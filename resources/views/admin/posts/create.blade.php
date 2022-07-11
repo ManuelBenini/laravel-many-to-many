@@ -77,6 +77,16 @@
                 </select>
             </div>
 
+            {{-- TAG --}}
+            <div class="mb-3">
+
+                @foreach ($tags as $tag)
+                    <input type="checkbox" name="tags[]" id="tag{{$loop->iteration}}" value="{{$tag->id}}" {{in_array($tag->id, old('tags', []) ) ? 'checked' : '' }}>
+                    <label for="tag{{$loop->iteration}}">{{$tag->name}}</label>
+                @endforeach
+
+            </div>
+
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
 

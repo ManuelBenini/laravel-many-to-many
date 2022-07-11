@@ -51,6 +51,10 @@ class PostController extends Controller
         $new_post->fill($data);
         $new_post->save();
 
+        if(array_key_exists('tags', $data)){
+            $new_post->tags()->attach($data['tags']);
+        }
+
         return redirect()->route('admin.posts.show', $new_post);
     }
 
@@ -90,12 +94,18 @@ class PostController extends Controller
     public function update(PostRequest $request, Post $post)
     {
         $data = $request->all();
-        $data['slug'] = Post::generateSlug($data['title']);
 
         if($data['title'] != $post->title){
-            $post->slug = $data['slug'];
+            $data['slug'] = Post::generateSlug($data['title']);
+        }else{
+            $post->tags()->detach();
         }
+
         $post->update($data);
+
+        if(array_key_exists('tags', $data)){
+            $post->tags()->sinc($data['tags']);
+        }
 
         return redirect()->route('admin.posts.show', $post);
     }
